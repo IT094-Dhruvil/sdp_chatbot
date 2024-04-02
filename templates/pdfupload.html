@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Upload your pdf</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .box{
+            box-sizing: border-box;
+            width: 50%;
+            margin-top: 10%;
+            padding: 20px;
+            border: 1px solid rgba(0,0,0,0.2);
+            box-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .title{
+            margin-bottom: 20px ;
+        }
+        .btn{
+            font-size: 17px;
+            padding: 5px 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container box">
+        <h2 class="title">Upload PDF</h2>
+        <form action="{{  url_for('pdfupload')  }}" method="post" enctype="multipart/form-data">
+            {{  form.hidden_tag()  }}
+            {{  form.file()  }}
+            {{  form.submit(  class='btn btn-success')  }}
+
+        </form>
+    </div>
+
+</body>
+</html>
