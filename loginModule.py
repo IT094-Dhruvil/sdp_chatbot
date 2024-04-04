@@ -149,10 +149,26 @@ def userpdfs():
     if request.method == 'POST':
         user_question = request.form['question']
         response_text = response(user_question)
-        return jsonify(response_text)  # Return response as JSON
+        return jsonify(response_text)
 
     return render_template('home.html')
 
+@app.route('/pdfcontent')
+def pdf_content():
+    user_id = session.get('user_id')
+
+    cursor = mysql1.connection.cursor()
+    cursor.execute("SELECT * FROM pdfs WHERE user_id = %s ORDER BY pid DESC LIMIT 1", (user_id,))
+    last_pdf = cursor.fetchone()
+    cursor.close()
+
+    byte_stream = BytesIO(last_pdf[3])
+    pdf_reader = PdfReader(byte_stream)
+    text = ""
+    for page in pdf_reader.pages:
+        text += page.extract_text()
+
+    return text
 
 
 
@@ -175,6 +191,8 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('signup.html', form=form)
+
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
