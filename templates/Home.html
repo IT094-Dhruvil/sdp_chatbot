@@ -215,20 +215,22 @@
         });
 
 
-    $(document).ready(function() {
-        $('#displayPdfContent').click(function() {
-            $.ajax({
-                type: 'GET',
-                url: '/pdfcontent',
-                success: function(response) {
-                    $('#content').val(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+   $(document).ready(function() {
+    $('#displayPdfContent').click(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/pdfcontent',
+            success: function(response) {
+
+                $('#content').val(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
     });
+});
+
 
 
 
